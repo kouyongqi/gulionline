@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>service</artifactId>
+        <groupId>com.atguigu</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>service_edu</artifactId>
+
+    <dependencies>
+        <!--service_base和common_utils依赖-->
+        <dependency>
+            <groupId>com.atguigu</groupId>
+            <artifactId>service_base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--easyexcel依赖  poi依赖从父工程继承-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+    </dependencies>
+
+    <!--为了自己定义的mapper xml文件可以被加载到class类路径下 进行编译-->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory><!--所在的目录-->
+                <includes><!--包括目录下的.xml 文件都会扫描到-->
+                    <include>**/*.xml</include>
+                </includes>
+                <!--iltering 选项 false 不启用过滤器， *.property 已经起到过滤的作用了-->
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>

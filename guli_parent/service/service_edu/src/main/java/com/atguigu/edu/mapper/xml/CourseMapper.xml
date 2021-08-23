@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.edu.mapper.CourseMapper">
+
+    <select id="getPublishCourseInfo" resultType="com.atguigu.edu.entity.vo.CoursePublishVo">
+        SELECT
+            ec.title as title,
+            ec.cover as cover,
+            ec.lesson_num as lessonNum,
+            esone.title as subjectLevelOne,
+            estwo.title as subjectLevelTwo,
+            et.`name` as teacherName,
+            ec.price as price
+        FROM edu_course AS ec
+                 LEFT JOIN edu_course_description AS ecd
+                           ON ec.id = ecd.id
+                 LEFT JOIN edu_teacher AS et
+                           ON ec.teacher_id = et.id
+                 LEFT JOIN edu_subject AS esone
+                           ON ec.subject_parent_id = esone.id
+                 LEFT JOIN edu_subject AS estwo
+                           ON ec.subject_id = estwo.id
+        WHERE ec.id = #{courseid};
+    </select>
+
+    <select id="getCourseInfoVo" resultType="com.atguigu.edu.entity.frontvo.CourseInfoVo">
+        SELECT ec.title as title,
+               ec.cover as cover,
+               ec.lesson_num as lessonNum,
+               ec.buy_count as buyCount,
+               ec.view_count as viewCount,
+               ecd.description as description,
+               et.id as teacherId,
+               et.intro as intro,
+               et.avatar as avatar,
+               esone.id as subjectLevelOneId,
+               esone.title as subjectLevelOne,
+               estwo.id as subjectLevelTwoId,
+               estwo.title as subjectLevelTwo,
+               et.`name` as teacherName,
+               ec.price as price
+        FROM edu_course AS ec
+                 LEFT JOIN edu_course_description AS ecd
+                           ON ec.id = ecd.id
+                 LEFT JOIN edu_teacher AS et
+                           ON ec.teacher_id = et.id
+                 LEFT JOIN edu_subject AS esone
+                           ON ec.subject_parent_id = esone.id
+                 LEFT JOIN edu_subject AS estwo
+                           ON ec.subject_id = estwo.id
+        WHERE ec.id = #{courseid};
+    </select>
+
+</mapper>
